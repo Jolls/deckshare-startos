@@ -4,14 +4,14 @@ import { storeJson } from './fileModels/store.json'
 import { getNonLocalUrls, pgDatabase, pgPort, pgUser, uiPort } from './utils'
 
 export const main = sdk.setupMain(async ({ effects }) => {
-  console.info(i18n('Starting Enshu!'))
+  console.info(i18n('Starting DeckShare!'))
 
   // Generated once on install by init/seedFiles.ts.
   const pgPassword = (await storeJson.read(s => s.pgPassword).const(effects)) ?? ''
   // Every non-local address the service is currently reachable at (LAN, mDNS,
   // Tor, ...), reactive so ORIGIN — and therefore the daemon — updates if the
   // set of addresses changes later. Upstream v0.1.26 made ORIGIN accept a
-  // comma-separated list (Jolls/enshu#111/#112), so there's no need to make
+  // comma-separated list (Jolls/deckshare#111/#112), so there's no need to make
   // the user pick a single primary address anymore.
   const origins = (await getNonLocalUrls(effects)).join(',')
 
@@ -29,19 +29,19 @@ export const main = sdk.setupMain(async ({ effects }) => {
     'postgres-sub',
   )
 
-  // Enshu's own upstream Dockerfile ships no migration tool, so this package's
-  // Dockerfile (root) builds `goose` alongside the `enshu` binary and bakes in
+  // DeckShare's own upstream Dockerfile ships no migration tool, so this package's
+  // Dockerfile (root) builds `goose` alongside the `deckshare` binary and bakes in
   // upstream-project/migrations at /migrations — see UPDATING.md.
-  const enshuSub = sdk.SubContainer.of(
+  const deckshareSub = sdk.SubContainer.of(
     effects,
-    { imageId: 'enshu' },
+    { imageId: 'deckshare' },
     sdk.Mounts.of().mountVolume({
       volumeId: 'main',
       subpath: 'media',
       mountpoint: '/data/media',
       readonly: false,
     }),
-    'enshu-sub',
+    'deckshare-sub',
   )
 
   return sdk.Daemons.of(effects)
@@ -77,7 +77,7 @@ export const main = sdk.setupMain(async ({ effects }) => {
       requires: [],
     })
     .addOneshot('migrate', {
-      subcontainer: enshuSub,
+      subcontainer: deckshareSub,
       // Idempotent — goose only applies migrations not yet recorded in its
       // bookkeeping table, so this is safe to run on every start.
       exec: {
@@ -85,10 +85,10 @@ export const main = sdk.setupMain(async ({ effects }) => {
       },
       requires: ['postgres'],
     })
-    .addDaemon('enshu', {
-      subcontainer: enshuSub,
+    .addDaemon('deckshare', {
+      subcontainer: deckshareSub,
       exec: {
-        command: ['/usr/local/bin/enshu'],
+        command: ['/usr/local/bin/deckshare'],
         env: {
           DATABASE_URL: databaseUrl,
           MEDIA_ROOT: '/data/media',

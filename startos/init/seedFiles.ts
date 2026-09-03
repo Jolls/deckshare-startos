@@ -3,7 +3,7 @@ import { storeJson } from '../fileModels/store.json'
 import { sdk } from '../sdk'
 
 // Internal secret consumed by setupMain (POSTGRES_PASSWORD / DATABASE_URL) —
-// generated once on fresh install. Enshu has no admin account to bootstrap;
+// generated once on fresh install. DeckShare has no admin account to bootstrap;
 // users register their own accounts through the web UI.
 export const seedFiles = sdk.setupOnInit(async (effects, kind) => {
   if (kind !== 'install') return

@@ -1,7 +1,7 @@
 import { T } from '@start9labs/start-sdk'
 import { sdk } from './sdk'
 
-// Enshu's own HTTP port (cmd/enshu/main.go's ADDR default of :3000).
+// DeckShare's own HTTP port (cmd/deckshare/main.go's ADDR default of :3000).
 export const uiPort = 3000
 
 // Host id (the `sdk.MultiHost.of` group) and interface id for the web UI,
@@ -11,8 +11,8 @@ export const uiInterfaceId = 'ui'
 
 // PostgreSQL sidecar: fixed internal port, not exposed via any interface.
 export const pgPort = 5432
-export const pgUser = 'enshu'
-export const pgDatabase = 'enshu'
+export const pgUser = 'deckshare'
+export const pgDatabase = 'deckshare'
 
 export function getNonLocalUrls(effects: T.Effects): Promise<string[]> {
   return sdk.host

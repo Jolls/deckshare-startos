@@ -1,14 +1,17 @@
 # Updating the upstream version
 
-Upstream is tracked via the `upstream-project/` git submodule, pinned to a tagged release
-(currently `v0.2.25`). This package's root `Dockerfile` builds from that submodule's source
-(see `README.md` § Image and Container Runtime for why it's a custom Dockerfile rather than
-`upstream-project/Dockerfile` directly) — there is no separate `postgres` version to track,
-that image is pinned independently by Docker Hub tag in `startos/manifest/index.ts`.
+Upstream is tracked via the `upstream-project/` git submodule, pinned to a commit on `main`
+(currently `4b3b53f`, the "Rename project from Enshu to DeckShare" merge — no tag exists for
+it yet as of this pin; the last tagged release, `v0.2.26`, predates the rename). This
+package's root `Dockerfile` builds from that submodule's source (see `README.md` § Image and
+Container Runtime for why it's a custom Dockerfile rather than `upstream-project/Dockerfile`
+directly) — there is no separate `postgres` version to track, that image is pinned
+independently by Docker Hub tag in `startos/manifest/index.ts`.
 
-Enshu's releases are not all tagged — check `CHANGELOG.md` in the submodule, not just
+DeckShare's releases are not all tagged — check `CHANGELOG.md` in the submodule, not just
 `git tag`, per its own `UPDATING`-equivalent notes (see `upstream-project/migrations/README.md`
-for the same caveat applied to schema history).
+for the same caveat applied to schema history). Re-pin to a real tag once upstream cuts one
+that includes the rename.
 
 ## Determining the upstream version
 
@@ -20,7 +23,7 @@ The current pin lives in two places that must agree:
 Fetch the latest release:
 
 ```sh
-gh api repos/Jolls/enshu/tags --jq '.[].name' | head -1
+gh api repos/Jolls/deckshare/tags --jq '.[].name' | head -1
 ```
 
 ## Applying the bump

@@ -12,7 +12,7 @@ export const setInterfaces = sdk.setupInterfaces(async ({ effects }) => {
   const ui = sdk.createInterface(effects, {
     name: i18n('Web Interface'),
     id: uiInterfaceId,
-    description: i18n('The Enshu web reviewer and admin UI'),
+    description: i18n('The DeckShare web reviewer and admin UI'),
     type: 'ui',
     masked: false,
     schemeOverride: null,
