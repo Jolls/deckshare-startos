@@ -16,10 +16,9 @@ comes up listening on `:3000` (confirmed via `start-cli package logs` and a live
 - [ ] **Open registration.** DeckShare has no built-in signup gate (confirmed: no such env var
       in `cmd/deckshare/main.go`). If that matters to you, flag it prominently before
       publishing — currently just noted under README § Limitations and Differences.
-- [ ] Re-verify `docker-tag`/submodule pins closer to publish time (Postgres image, upstream
-      DeckShare release) per `UPDATING.md` — this package is currently pinned to an untagged
-      `main` commit (the rename itself); re-pin to a real tag once upstream cuts one, and
-      re-check `postgres` at publish time too.
+- [x] Re-pinned upstream from the untagged rename commit to the tagged `v0.3.8` release.
+      Re-verify `docker-tag`/submodule pins again closer to publish time (Postgres image,
+      upstream DeckShare release) per `UPDATING.md`.
 - [ ] **Package id changed** (`enshu` → `deckshare`) — this is a new package identity as far
       as StartOS is concerned. The live install on `192.168.121.132` is still the old `enshu`
       package; it needs a manual backup, uninstall of `enshu`, install of `deckshare`, and

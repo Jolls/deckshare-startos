@@ -1,9 +1,7 @@
 # Updating the upstream version
 
-Upstream is tracked via the `upstream-project/` git submodule, pinned to a commit on `main`
-(currently `4b3b53f`, the "Rename project from Enshu to DeckShare" merge — no tag exists for
-it yet as of this pin; the last tagged release, `v0.2.26`, predates the rename). This
-package's root `Dockerfile` builds from that submodule's source (see `README.md` § Image and
+Upstream is tracked via the `upstream-project/` git submodule, pinned to a tagged release
+(currently `v0.3.8`). This package's root `Dockerfile` builds from that submodule's source (see `README.md` § Image and
 Container Runtime for why it's a custom Dockerfile rather than `upstream-project/Dockerfile`
 directly) — there is no separate `postgres` version to track, that image is pinned
 independently by Docker Hub tag in `startos/manifest/index.ts`.
