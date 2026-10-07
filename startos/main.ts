@@ -7,7 +7,8 @@ export const main = sdk.setupMain(async ({ effects }) => {
   console.info(i18n('Starting DeckShare!'))
 
   // Generated once on install by init/seedFiles.ts.
-  const pgPassword = (await storeJson.read(s => s.pgPassword).const(effects)) ?? ''
+  const pgPassword =
+    (await storeJson.read((s) => s.pgPassword).const(effects)) ?? ''
   // Every non-local address the service is currently reachable at (LAN, mDNS,
   // Tor, ...), reactive so ORIGIN — and therefore the daemon — updates if the
   // set of addresses changes later. Upstream v0.1.26 made ORIGIN accept a
@@ -59,8 +60,14 @@ export const main = sdk.setupMain(async ({ effects }) => {
         display: null, // internal sidecar, not shown to the user
         fn: async () => {
           const result = await postgresSub.exec([
-            'pg_isready', '-q', '-h', '127.0.0.1',
-            '-d', pgDatabase, '-U', pgUser,
+            'pg_isready',
+            '-q',
+            '-h',
+            '127.0.0.1',
+            '-d',
+            pgDatabase,
+            '-U',
+            pgUser,
           ])
           if (result.exitCode !== 0) {
             return {
@@ -81,7 +88,14 @@ export const main = sdk.setupMain(async ({ effects }) => {
       // Idempotent — goose only applies migrations not yet recorded in its
       // bookkeeping table, so this is safe to run on every start.
       exec: {
-        command: ['/usr/local/bin/goose', '-dir', '/migrations', 'postgres', databaseUrl, 'up'],
+        command: [
+          '/usr/local/bin/goose',
+          '-dir',
+          '/migrations',
+          'postgres',
+          databaseUrl,
+          'up',
+        ],
       },
       requires: ['postgres'],
     })

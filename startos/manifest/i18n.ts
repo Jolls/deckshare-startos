@@ -2,8 +2,10 @@ export const short = {
   en_US: 'Multiuser, self-hosted spaced repetition for classrooms and teams',
   es_ES: 'Repetición espaciada multiusuario autoalojada para aulas y equipos',
   de_DE: 'Selbstgehostetes Multiuser-Spaced-Repetition für Klassen und Teams',
-  pl_PL: 'Wieloużytkownikowa, samodzielnie hostowana powtórka rozłożona w czasie dla klas i zespołów',
-  fr_FR: 'Répétition espacée multiutilisateur auto-hébergée pour les classes et les équipes',
+  pl_PL:
+    'Wieloużytkownikowa, samodzielnie hostowana powtórka rozłożona w czasie dla klas i zespołów',
+  fr_FR:
+    'Répétition espacée multiutilisateur auto-hébergée pour les classes et les équipes',
 }
 
 export const long = {

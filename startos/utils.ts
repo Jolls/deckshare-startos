@@ -16,12 +16,12 @@ export const pgDatabase = 'deckshare'
 
 export function getNonLocalUrls(effects: T.Effects): Promise<string[]> {
   return sdk.host
-    .getOwn(effects, uiMultiHostId, host => {
+    .getOwn(effects, uiMultiHostId, (host) => {
       const iface =
         host &&
         Object.values(host.bindings)
-          .flatMap(b => Object.values(b.interfaces))
-          .find(i => i.id === uiInterfaceId)
+          .flatMap((b) => Object.values(b.interfaces))
+          .find((i) => i.id === uiInterfaceId)
       return iface ? iface.addressInfo.nonLocal.format() : []
     })
     .const()
