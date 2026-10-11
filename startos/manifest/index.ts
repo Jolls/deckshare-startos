@@ -24,7 +24,7 @@ export const manifest = setupManifest({
     // second build target and a non-distroless final stage rather than reusing
     // upstream-project/Dockerfile directly.
     deckshare: {
-      source: { dockerBuild: {} },
+      source: { dockerBuild: { workdir: null, dockerfile: null } },
       arch: ['x86_64', 'aarch64'],
     },
     // Confirmed on Docker Hub 2026-08-17: postgres:18.6 ships amd64 and arm64.
