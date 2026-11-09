@@ -3,7 +3,7 @@
 Core packaging is done and verified: `make x86` builds cleanly, installs, PostgreSQL
 initializes, the `migrate` oneshot applies all 15 goose migrations, and the `deckshare` daemon
 comes up listening on `:3000` (confirmed via `start-cli package logs` and a live install on
-`192.168.121.132`, at the time still under the `enshu` package id). Remaining items:
+the test box, at the time still under the `enshu` package id). Remaining items:
 
 - [x] **Icon.** Upstream added `web/static/favicon.png` (256x256) as of the Enshu→DeckShare
       rename. Re-encoded losslessly (palette PNG) to fit the 40 KiB budget; now `icon.png`.
@@ -20,6 +20,6 @@ comes up listening on `:3000` (confirmed via `start-cli package logs` and a live
       Re-verify `docker-tag`/submodule pins again closer to publish time (Postgres image,
       upstream DeckShare release) per `UPDATING.md`.
 - [ ] **Package id changed** (`enshu` → `deckshare`) — this is a new package identity as far
-      as StartOS is concerned. The live install on `192.168.121.132` is still the old `enshu`
+      as StartOS is concerned. The live install on the test box is still the old `enshu`
       package; it needs a manual backup, uninstall of `enshu`, install of `deckshare`, and
       restore into it (not yet exercised under the new id).
