@@ -17,7 +17,7 @@ export const manifest = setupManifest({
   // all under separate subpaths (see startos/main.ts).
   volumes: ['main'],
   images: {
-    // Built from the upstream-project/ git submodule (pinned to v0.1.25) via the
+    // Built from the upstream-project/ git submodule (pinned per UPDATING.md) via the
     // custom Dockerfile in this package's root — see UPDATING.md. Upstream
     // publishes no prebuilt image, and its own Dockerfile omits the `goose`
     // migration tool this package's oneshot needs, so this Dockerfile adds a

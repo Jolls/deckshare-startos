@@ -6,7 +6,7 @@
 # starts, so this Dockerfile adds a second binary and keeps a minimal shell in
 # the final stage. See UPDATING.md for how this tracks upstream-project's pin.
 
-FROM golang:1.26 AS build
+FROM golang:1.27 AS build
 WORKDIR /src
 COPY upstream-project/go.mod upstream-project/go.sum ./
 RUN go mod download
